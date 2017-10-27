@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>九宫格</title>
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+        <script type="text/javascript" src="js/jquery.min.js" ></script>
+        <style>
+            a, body, center, div, fieldset,footer, form, h1, h2, h3, h4, h5, h6, header, hr, html, img, input, li,  p,  span, ul, var input{
+                margin: 0;
+                border: 0;
+                padding: 0;
+                font-style: normal;
+                color: #323232;
+                box-sizing: border-box;
+                -moz-box-sizing:border-box; /* Firefox */
+                -webkit-box-sizing:border-box; /* Safari */
+            }
+            html,body{
+                background: #fff;
+            }
+            ul{
+                text-decoration: none;
+                list-style-type: none;
+                top: 100px;
+                position: relative;
+            }
+            .video_list>li{
+                float: left;
+                width: 32%;
+                text-align: center;
+                border: 1px solid #ccc;
+                padding-top: 31%;
+                margin-left: 1%;
+                margin-top: 1%;
+                position: relative;
+            }
+            .video_list>li>div{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #09BE07;
+            }
+            .video_list>li>div>span{
+                display: inline-block;
+                margin-top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .reset{
+            	text-align: center;
+            	border: 1px solid #09BE07;
+            	border-radius: 3px;
+            	background-color: #09BE07;
+            	color: #FFFFFF;
+            	bottom: 20px;
+            	left: 0;
+            	right: 0;
+            	position: absolute;
+            	height: 25px;
+            	width: 25%;
+            	margin-left: auto;
+            	margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="video_list">
+            <li id="one"><div><span></span></div></li>                    
+            <li id="two"><div><span></span></div></li>                    
+            <li id="three"><div><span></span></div></li>                    
+            <li id="four"><div><span></span></div></li>                    
+            <li id="five"><div><span></span></div></li>                    
+            <li id="six"><div><span></span></div></li>                    
+            <li id="seven"><div><span></span></div></li>                    
+            <li id="eight"><div><span></span></div></li>                    
+            <li id="nine"><div><span></span></div></li>                    
+        </ul>  
+        <div class="reset">reset</div>
+        <script>
+        	$(document).ready(function(){
+        		
+        		onload();
+				
+        		function onload(){
+					var a = [0,1,2,3,4,5,6,7,8];
+        			for(var i = 0;i < 9;i++){
+        				
+        				var j = Math.round(Math.random()*a.length-1);
+        				if(j < 0){
+        					j = 0
+        				}
+        				$('ul').find('li').eq(i).find('span').html(a[j])
+
+        				if($('ul').find('li').eq(i).find('span').html() == "0"){
+        					$('ul').find('li').eq(i).find('div').css('background-color','#fff');
+        					$('ul').find('li').eq(i).find('span').html("");
+        				}
+        				a.splice(j,1)
+        				
+        			}
+
+        		}
+        		
+        		$('ul li').click(function(){
+        			var a = $('#one').find('span').html();
+	    			var b = $('#two').find('span').html();
+	    			var c = $('#three').find('span').html();
+	    			var d = $('#four').find('span').html();
+	    			var e = $('#five').find('span').html();
+	    			var f = $('#six').find('span').html();
+	    			var g = $('#seven').find('span').html();
+	    			var h = $('#eight').find('span').html();
+	    			var i = $('#nine').find('span').html();
+	    			
+	    			console.log(a)
+	    			if(a == "1" && b == "2" && c == "3"&& d == "4" && e == "5"&& f == "6" && g == "7"&& h == "8" && i == ""){
+	    				alert("通过")
+	    			}
+        		})
+    		
+        		$('#one').click(function(){
+        			var a = $('#two').find('span').html();
+        			var b = $('#four').find('span').html();
+        			var c = $('#one').find('span').html();
+        			if(a != "" && b != ""){
+        				return false;
+        			}else if(a == "" && b != ""){
+        				$('#two').find('span').html(c);
+        				$('#two div').css('background-color','#09BE07')
+        			}else if(a != "" && b == ""){
+        				$('#four').find('span').html(c);
+        				$('#four div').css('background-color','#09BE07')
+        			}
+        			$('#one').find('span').html("");
+        			$('#one div').css('background-color','#fff')
+        		})
+        		
+        		$('#two').click(function(){
+        			var a = $('#one').find('span').html();
+        			var b = $('#two').find('span').html();
+        			var c = $('#three').find('span').html();
+        			var d = $('#five').find('span').html();
+        			if(a != "" && c != "" && d != ""){
+        				return false;
+        			}else if(a == "" && c != "" && d != ""){
+        				$('#one').find('span').html(b);
+        				$('#one div').css('background-color','#09BE07')
+        			}else if(a != "" && c == "" && d != ""){
+        				$('#three').find('span').html(b);
+        				$('#three div').css('background-color','#09BE07')
+        			}else if(a != "" && c != "" && d == ""){
+        				$('#five').find('span').html(b);
+        				$('#five div').css('background-color','#09BE07')
+        			}
+        			$('#two').find('span').html("");
+        			$('#two div').css('background-color','#fff')
+        		})
+        		
+        		$('#three').click(function(){
+        			var a = $('#two').find('span').html();
+        			var b = $('#three').find('span').html();
+        			var c = $('#six').find('span').html();
+        			if(a != "" && c != ""){
+        				return false;
+        			}else if(a == "" && c != ""){
+        				$('#two').find('span').html(b);
+        				$('#two div').css('background-color','#09BE07')
+        			}else if(a != "" && c == ""){
+        				$('#six').find('span').html(b);
+        				$('#six div').css('background-color','#09BE07')
+        			}
+        			$('#three').find('span').html("");
+        			$('#three div').css('background-color','#fff')
+        		})
+        		
+        		$('#four').click(function(){
+        			var a = $('#one').find('span').html();
+        			var b = $('#four').find('span').html();
+        			var c = $('#five').find('span').html();
+        			var d = $('#seven').find('span').html();
+        			if(a != "" && c != "" && d != ""){
+        				return false;
+        			}else if(a == "" && c != "" && d != ""){
+        				$('#one').find('span').html(b);
+        				$('#one div').css('background-color','#09BE07')
+        			}else if(a != "" && c == "" && d != ""){
+        				$('#five').find('span').html(b);
+        				$('#five div').css('background-color','#09BE07')
+        			}else if(a != "" && c != "" && d == ""){
+        				$('#seven').find('span').html(b);
+        				$('#seven div').css('background-color','#09BE07')
+        			}
+        			$('#four').find('span').html("");
+        			$('#four div').css('background-color','#fff')
+        		})
+        		
+        		$('#five').click(function(){
+        			var a = $('#two').find('span').html();
+        			var b = $('#four').find('span').html();
+        			var c = $('#six').find('span').html();
+        			var d = $('#eight').find('span').html();
+        			var e = $('#five').find('span').html();
+        			if(a != "" && b != "" && c != "" && d != ""){
+        				return false;
+        			}else if(a == "" && b != "" && c != "" && d != ""){
+        				$('#two').find('span').html(e);
+        				$('#two div').css('background-color','#09BE07')
+        			}else if(a != "" && b == "" && c != "" && d != ""){
+        				$('#four').find('span').html(e);
+        				$('#four div').css('background-color','#09BE07')
+        			}else if(a != ""&& b != "" && c == "" && d != ""){
+        				$('#six').find('span').html(e);
+        				$('#six div').css('background-color','#09BE07')
+        			}else if(a != ""&& b != "" && c != "" && d == ""){
+        				$('#eight').find('span').html(e);
+        				$('#eight div').css('background-color','#09BE07')
+        			}
+        			$('#five').find('span').html("");
+        			$('#five div').css('background-color','#fff')
+        		})
+        		
+        		$('#six').click(function(){
+        			var a = $('#three').find('span').html();
+        			var b = $('#five').find('span').html();
+        			var c = $('#six').find('span').html();
+        			var d = $('#nine').find('span').html();
+        			if(a != "" && b != "" && d != ""){
+        				return false;
+        			}else if(a == "" && b != "" && d != ""){
+        				$('#three').find('span').html(c);
+        				$('#three div').css('background-color','#09BE07')
+        			}else if(a != "" && b == "" && d != ""){
+        				$('#five').find('span').html(c);
+        				$('#five div').css('background-color','#09BE07')
+        			}else if(a != "" && b != "" && d == ""){
+        				$('#nine').find('span').html(c);
+        				$('#nine div').css('background-color','#09BE07')
+        			}
+        			$('#six').find('span').html("");
+        			$('#six div').css('background-color','#fff')
+        		})
+        		
+        		$('#seven').click(function(){
+        			var a = $('#four').find('span').html();
+        			var b = $('#seven').find('span').html();
+        			var c = $('#eight').find('span').html();
+        			if(a != "" && c != ""){
+        				return false;
+        			}else if(a == "" && c != ""){
+        				$('#four').find('span').html(b);
+        				$('#four div').css('background-color','#09BE07')
+        			}else if(a != "" && c == ""){
+        				$('#eight').find('span').html(b);
+        				$('#eight div').css('background-color','#09BE07')
+        			}
+        			$('#seven').find('span').html("");
+        			$('#seven div').css('background-color','#fff')
+        		})
+        		
+        		$('#eight').click(function(){
+        			var a = $('#five').find('span').html();
+        			var b = $('#seven').find('span').html();
+        			var c = $('#eight').find('span').html();
+        			var d = $('#nine').find('span').html();
+        			if(a != "" && b != "" && d != ""){
+        				return false;
+        			}else if(a == "" && b != "" && d != ""){
+        				$('#five').find('span').html(c);
+        				$('#five div').css('background-color','#09BE07')
+        			}else if(a != "" && b == "" && d != ""){
+        				$('#seven').find('span').html(c);
+        				$('#seven div').css('background-color','#09BE07')
+        			}else if(a != "" && b != "" && d == ""){
+        				$('#nine').find('span').html(c);
+        				$('#nine div').css('background-color','#09BE07')
+        			}
+        			$('#eight').find('span').html("");
+        			$('#eight div').css('background-color','#fff')
+        		})
+        		
+        		$('#nine').click(function(){
+        			var a = $('#six').find('span').html();
+        			var b = $('#eight').find('span').html();
+        			var c = $('#nine').find('span').html();
+        			if(a != "" && b != ""){
+        				return false;
+        			}else if(a == "" && b != ""){
+        				$('#six').find('span').html(c);
+        				$('#six div').css('background-color','#09BE07')
+        			}else if(a != "" && b == ""){
+        				$('#eight').find('span').html(c);
+        				$('#eight div').css('background-color','#09BE07')
+        			}
+        			$('#nine').find('span').html("");
+        			$('#nine div').css('background-color','#fff')
+        			
+        		})
+        		
+        		$('.reset').click(function(){
+        			location.reload();
+        		})
+        	})
+        </script>
+    </body>
+</html>
